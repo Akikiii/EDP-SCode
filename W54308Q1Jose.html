@@ -1,0 +1,139 @@
+<html>
+<head>
+</head>
+<style>
+
+  body{
+    background-color: lightgrey;
+  }
+
+  span{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .inp{
+    text-align: center;
+    background-color:lightyellow;
+    align-self: center;
+    margin: auto;
+    border: 5px outset green;
+    width: 50%;
+    font-size: 20px;
+    font-weight:bold;
+  } 
+  table,
+  th,
+  td {
+      border: 3px solid black;
+      border-collapse: collapse;
+      width: 70%;
+  }
+
+  table {
+      width: 70%;
+      align-self: center;
+  }
+
+  table.fixed {
+      table-layout: fixed;
+  }
+  table.fixed td {
+      overflow: hidden;
+  }
+  .container{
+    text-align:center;
+    margin: auto;
+    border: 6px outset black;
+    background-color: lightgreen;
+    width: 50%;
+    padding: 10px;
+  }
+  .tables{
+  border: 3px;
+   width: 50%;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 10px;
+   table-layout: fixed;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  tr:nth-child(odd) {
+    background-color: #cfcfc4;
+  }
+
+  .block{
+    border: 10px outset black;
+    display: block;
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+    font-size:16px;
+    text-align: center;
+    background-color:#ff6961 ;
+    cursor: pointer;
+  }
+
+
+</style>
+<body>
+  <div class = "inp">
+  Input Student name:<input type="text" id="Sname" placeholder="Ex: Joei Raqui R. Jose">
+  Input Course and Section:<input type="text" id="sect" placeholder="Ex: BSCS-2A">
+  Input Subjects (Seperated by commas):<input type="text" id="Subjects" placeholder="Math,Science,Etc"> <br>
+  Input 1st Grading according to Subjects(Seperated by commas)<input type="text" id="Grades1" placeholder="100,99,98"><br>
+  Input 2nd Grading according to Subjects(Seperated by commas)<input type="text" id="Grades2" placeholder="100,99,98"><br>
+  Input 3rd Grading according to Subjects(Seperated by commas)<input type="text" id="Grades3" placeholder="100,99,98"><br>
+  Input 4th Grading according to Subjects(Seperated by commas)<input type="text" id="Grades4" placeholder="100,99,98">
+  </div>
+<button type = "button" class = "block" onclick="createTable()">Create Report Card</button>
+<div class = "container">
+  <h1>Report Card</h1>
+  <span id = "name"></span>
+  <div class = "tables" id="table">
+  </div>
+</div>
+</body>
+<script>
+    function createTable() {
+      let StudName = document.getElementById("Sname").value;
+      let Section = document.getElementById("sect").value
+      var Subj = document.getElementById("Subjects").value;
+      var FirstGrading = document.getElementById("Grades1").value;
+      var SecondGrading = document.getElementById("Grades2").value;
+      var ThirdGrading = document.getElementById("Grades3").value;
+      var FourthGrading = document.getElementById("Grades4").value;
+      var Subjects = Subj.split(",");
+      var FirstG = FirstGrading.split(",");
+      var SecondG = SecondGrading.split(",");
+      var ThirdG = ThirdGrading.split(",");
+      var FourthG = FourthGrading.split(",");
+      var table = "<table border='2'>";
+        table += "<tr><td>" + "Subjects" + "<td>" + "1st Quarter" + "<td>" + "2nd Quarter" + "<td>" + "3rd Quarter" + "<td>" + "4th Quarter" + "<td>"+"Final Grade" +"</tr></td>";
+      
+        for (let i = 0; i < Subjects.length; i++) {
+        let combined = (parseInt(FirstG[i])+ parseInt(SecondG[i])+ parseInt(ThirdG[i])+ parseInt(FourthG[i]))/4;
+        table += "<tr><td>" + Subjects[i] + "<td>" + Checker(FirstG[i]) + "<td>" + Checker(SecondG[i]) + "<td>" + Checker(ThirdG[i]) + "<td>" + Checker(FourthG[i])  + "<td>" + Checker(combined) + "</td></tr>";
+      }
+      table += "</table>";
+      document.getElementById("table").innerHTML = table;
+      document.getElementById("name").innerHTML ="Student Name: " +StudName +"\t\t Grade & Section:" + Section;
+    }
+
+    function Checker(Grades){
+    
+      if(Grades >= 98 && Grades <= 100){ return "A+"}
+      if(Grades >= 95 && Grades <= 97){ return "A-"}
+      else if(Grades >= 92 && Grades <= 94){ return "B+"}
+      else if(Grades >= 89 && Grades <= 91){ return "B"}
+      else if(Grades >= 86 && Grades <= 88){ return "B-"}
+      else if(Grades >= 83 && Grades <= 85){ return "C+"}
+      else if (Grades >= 80 && Grades <= 82){ return "C"}
+      else if(Grades >= 77 && Grades <= 79){ return "C-"}
+      else if(Grades >= 74 && Grades <= 76){ return "D"}
+      else if(Grades >= 0 && Grades <= 73){ return "F"}
+    }
+    </script>
+</html>
